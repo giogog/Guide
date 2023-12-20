@@ -26,13 +26,15 @@ Create Db Context class
 	1)exampleContext:DbContext
 	2)public exampleContext(DbContextOptions<exampleContext> options): base(options){}
 	3)public DbSet<someModel> models {get; set;}
+
 	- Db Context injection
-		1)builder.Services.AddDbContext<exampleContext>(options => options.UseSqlServer(connectionString) - > არგუმენტად გადაეცემა კოლექცია, ამ შემთხვევაშიკოლექციის ერთერთი პარამეტრი UseSqlServer)
+		1)builder.Services.AddDbContext<exampleContext>(options => options.UseSqlServer(connectionString) - > არგუმენტად გადაეცემა კოლექცია, ამ შემთხვევაში 		კოლექციის ერთერთი პარამეტრი UseSqlServer)
 
 Initial EF migration
 	1)in app csjson change <InvariantGlobalization>true</InvariantGlobalization> --> <InvariantGlobalization>false</InvariantGlobalization>
 	2)Nuget : Add-Migration InitialCreate // PowerShell : dotnet ef migrations add Initial -o (ფოლდერის მისამართი)
 	3)Nuget : Update-Database // PowerShell : dotnet ef database update
+
 EF Async Methods
 	// Asynchronous Read (Retrieve)
 	var result = await _context.Entities(User).ToListAsync();

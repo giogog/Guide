@@ -5,10 +5,10 @@ Push
 	git status - git ის სტატუსის შემოწმება, არის თუ არა დაყენებული პროექტში
 	git init - git ის ინიციალიზება პროექტში 
 	dotnet new gitignore - გიტიგნორის დამატება 
-	echo "(მისამართი)" >> .gitignore - ფაილის გიტიგნორში დამატება 
+	echo "(folder/address.cs)" >> .gitignore - ფაილის გიტიგნორში დამატება 
 	git add . - ცვლილებების შენახვა
-	git commit -m "(მესიჯი)" - ცვლილებების დამატება
-	git branch -M (ბრანჩის სახელი) - ბრანჩის დამატება ან სახელის შეცვლა
+	git commit -m "(Message)" - ცვლილებების დამატება
+	git branch -M (branch name exp main/origin) - ბრანჩის დამატება ან სახელის შეცვლა
 	git remote add origin (repository address on github.com) - თუ პირველად ვამატებთ გიტჰაბის რეპოზიტორის ურლ ს
 	git remote set-url origin (repository address on github.com) - თუ ვცვლით გიტჰაბის რეპოზიტორის ურლ ს
 	git remote show origin - გაჩვენებს რა ურლ ზე იტვირთბა
@@ -19,7 +19,7 @@ Push
 	git credential-store --reset  # To reset stored credentials
 
 Pull
-	git clone (რეპოზიტორის ურლ) (ფოლდერის სახელი)
-	git pull origin (ბრანჩის სახელი)
+	git clone (github.com repository url) (folder name)
+	git pull origin (branch name exp main/origin)
 Reset
 	git reset --hard HEAD - დააბრუნებს ბოლო დაკომიტებულამდე
