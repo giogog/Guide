@@ -1,40 +1,45 @@
 Building Project With Dotnet CLI:
-	1)Chosing Folder
-	2)dotnet new sln - ფოლდერში სოლუშენიც ინიციალიზება
-	3)dotnet sln add (folderis saxeli) - სოლუშენის გამშვები ფაილის დამატება პროექტის რომელიმე ფაილში
-	4)dotnet new list - პროექტების ჩამონათვალი
-	5)dotnet new webapi -n (სახელი)
-	6)dotnet build - პროექტის დაბილდვა 
-	7)dotnet run - პროექტის გაშვება
-	8)dotnet watch - პროექტის გაშვება, მონიტორინგი, ცვლილებების შეტანა პროექტში ის რომ ლაივ რეჟიმში შეიცვალოს
-	9)dotnet dev-certs https --trust = https სერთიფიკატის დამატება
-	10)dotnet dev-certs https --clean = https სერთიფიკატის გაუქმება
-	11)appsetting.json : "Microsoft.AspNetCore":"Warning" -> "Information" - გაშვებულ პროექტზე უფრო მეტ ინფოს დაწერს 
+	Chosing Folder
+	dotnet new sln - ფოლდერში სოლუშენიც ინიციალიზება
+	dotnet sln add (folderis saxeli) - სოლუშენის გამშვები ფაილის დამატება პროექტის რომელიმე ფაილში
+	dotnet new list - პროექტების ჩამონათვალი
+	dotnet new webapi -n (სახელი)
+	dotnet build - პროექტის დაბილდვა 
+	dotnet run - პროექტის გაშვება
+	dotnet watch - პროექტის გაშვება, მონიტორინგი, ცვლილებების შეტანა პროექტში ის რომ ლაივ რეჟიმში შეიცვალოს
+	dotnet dev-certs https --trust = https სერთიფიკატის დამატება
+        dotnet dev-certs https --clean = https სერთიფიკატის გაუქმება
+	appsetting.json : "Microsoft.AspNetCore":"Warning" -> "Information" - გაშვებულ პროექტზე უფრო მეტ ინფოს დაწერს 
 
 Nuget Packages:
-	1)Entity Framework Core,Tools,Sql Server,Design - dotnet add package Microsoft.EntityFrameworkCore.(specific package) --version 8.0.0 ||| dotnet tool install/update --global dotnet-ef --version 8.0.0 პროექტში დამატება ან განახლება
-	2)Auto Mapper,Dependency Injection
-	3)AspNetCore.Indentity
-	4)AspNetCore.Indentity.EntityFrameWorkCore
+	Entity Framework Core,Tools,Sql Server,Design - dotnet add package Microsoft.EntityFrameworkCore.(specific package) --version 8.0.0 ||| dotnet tool install/update --global dotnet-ef --version 8.0.0 პროექტში დამატება ან 																													განახლება
+	Auto Mapper,Dependency Injection
+
+	AspNetCore.Indentity
+
+	AspNetCore.Indentity.EntityFrameWorkCore
 
 Secrets initialization and set
-	1)dotnet user-secrets set "ConnectionStrings:DefaultConnection" "[ConnectionString]" --project "[Your Project Folder]"
-	- Get Secret
+	dotnet user-secrets set "ConnectionStrings:DefaultConnection" "[ConnectionString]" --project "[Your Project Folder]"
+
+	Get Secret
 		1)var Secret = builder.Configuration["ConnectionStrings:DefaultConnection"]
 
 Create Db Context class
-	1)exampleContext:DbContext
-	2)public exampleContext(DbContextOptions<exampleContext> options): base(options){}
-	3)public DbSet<someModel> models {get; set;}
+	exampleContext:DbContext
+	public exampleContext(DbContextOptions<exampleContext> options): base(options){}
+	public DbSet<someModel> models {get; set;}
 
-	- Db Context injection
+	Db Context injection
 		1)builder.Services.AddDbContext<exampleContext>(options => options.UseSqlServer(connectionString) - > არგუმენტად გადაეცემა კოლექცია, ამ შემთხვევაში 		კოლექციის ერთერთი პარამეტრი UseSqlServer)
 
 Initial EF migration
-	1)in app csjson change <InvariantGlobalization>true</InvariantGlobalization> --> <InvariantGlobalization>false</InvariantGlobalization>
-	2)Nuget : Add-Migration InitialCreate // PowerShell : dotnet ef migrations add Initial -o (ფოლდერის მისამართი)
-	3)Nuget : Update-Database // PowerShell : dotnet ef database update
+	in app csjson change <InvariantGlobalization>true</InvariantGlobalization> --> <InvariantGlobalization>false</InvariantGlobalization>
 
+	Nuget : Add-Migration InitialCreate // PowerShell : dotnet ef migrations add Initial -o (ფოლდერის მისამართი)
+
+	Nuget : Update-Database // PowerShell : dotnet ef database update
+	
 EF Async Methods
 	// Asynchronous Read (Retrieve)
 	var result = await _context.Entities(User).ToListAsync();
@@ -59,6 +64,8 @@ EF Async Methods
     		await dbContext.SaveChangesAsync();
 	}
 
+Authorization&Authentication
+	
 
 
 

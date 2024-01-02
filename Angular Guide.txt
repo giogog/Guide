@@ -1,0 +1,130 @@
+Install
+	npm install -g @angular/cli@16
+	ng version - See version of installed angular
+	ng new (folder name) - install angular folders in project with specific folder 
+Extensions
+	Angular Language Service
+	
+Run
+	cd (Angular folder) - it should run from angular folder
+	ng serve - run project
+
+Structure
+	General Structure - ზოგადი ანგულარის სტრუქტურით, ყველაფერი იწერება ერთგვარ c# ის მსგავსს ატრიბუტებში რომელსაც დეკორატორს ვეძახით, ყველა ატრიბუტს/დეკორატორს შესაბამისად მოყვება კლასი, რომელიც ლოგიკურად აღწერს ამ ატრიბუტს მაგ. მოდულს ან კომპონენტს, შეძლება გავუწეროთ პარამეტრები და 				ფუნქციები თუ ამ კომპონენტმა ან მოდულმა გამოძახებისას რა უნდა ქნას 
+	Decorator - არის ატრიბუტები
+	Component - კომპონენტი არის ხელახლა გამოყენებადი UI ნაწილი რომელსაც კოდით ვუწერთ ფუქნციებს თუ რა უდნა ქნას ფრონტზე , შედგება სამი ძირითადი ნაწილისგან
+		selector - სელექტორის მონიშვნით ჩვენ შემდეგ საერთო html კოდში (მაგ. index.html) შეგვიძლია გამოვიძახოთ
+		templete/templateUrl: -  თემფლეთი არის ის html ის კოდი ან მისი მიასამართი (./example.html) რომელიც შემდეგ საერთო html კოდში ჩაჯდება - აქ პირდაპირ შეგვიძლია სხვა კომპონენტი ჩავსვათ თუ მოცემულ html კოდში სხვა კომპონენტის სელექტორს ჩავსვავრთ მაგ .templete: <childComponent></childComponent>
+		style/styleUrl - აქ მივუთითებთ იმ css ის მისამართს რომელიც კონკრეტულად ამ templete ზე მუშაობს ან პირდაპირ გავუწერთ css ის ლოგიკას
+		providers - 
+		inputs - 
+		outputs - 
+		directives - იმ შემთხვევაში თუ გვაქ childComponent რომელსაც გააჩნია თავისი დირექტივები მაშინ მშობელ Component შიც უდნა გავწეროთ directives: პარამეტრი და იქ დავამატოთ შვილი component ი არაიში
+		animations - 
+		moduleId - 
+		schemas - 
+
+		Example
+
+			@Component({
+  				selector: 'app-product-list',
+  				templateUrl: './product-list.component.html',
+  				styles: []
+			})
+
+			export class ProductListComponent
+
+	Module - მოდული არის საერთო სივრცე სადაც კომპონენტები, სერვისები და სხვადა სხვა რამეს აერთიანებ, მაგალითად შეგვიძლია გავაკეთოთ მთლიანი აპლიკაციის ერთი კონკრეტული მოდული  რომელიც მხოლოდ log in/register ის ნაწილს მოიცავს თავის კომპონენტებიან ყველაფრიანად, შედგება რამოდენიმ 				ნაწილისგან
+		declarations - არის ARRAY სადაც შედის კომპონენტები, დირექტივები და პაიპსები
+		imports	-  არის ARRAY სადაც შედის მოდულები რომლებიც ამ კონკრეტურ მოდელში უნდა შედიოდეს და მათ კომპონენტებს კომპონენტებს და სხვა დეტალებს იყენებდნენ
+		bootstrap - არის ARRAY სადაც შედის კომპონენტები რომლებიც მოდელის ჩატვირთვისას უნდა გაეშვას 
+		providers - 
+		exports - 
+		entryComponents -
+		
+		Example
+ 
+			@NgModule({
+  				declarations: [
+    					AppComponent,
+    					HomeComponent,
+    					CustomDirective,
+   					CustomPipe
+  				],
+  				imports: [BrowserModule],
+    		 				
+  				providers: [ProductService],
+
+  				bootstrap: [AppComponent]
+			})
+			export class AppModule { }
+
+	Directives - დირექტივებით ჩვენ შევიძლია მანიპულაცია მოვახდინოთ Html ზე 
+		ngFor - ჩვენ შეგვიძლია ჩამოვშალოთ table <ul>
+  								<li *ngFor="let item of items">{{ item }}</li>
+							      </ul>
+		ngIf - ჩვენ შეგვიძლია კონკრეტულ ელემენტზე გავწეროთ მოქმედების ისეთი ლოგიკა რაც true da false გადაწყვეტილებას ექვემდებარება, მაგ. გამოვაჩინოთ თუ არა ელემტი <div *ngIf="isLoggedIn">Welcome, {{ username }}!</div>
+
+		ngStyle - ჩვენ კონკრეტულ html ელემნთზე გავწეროთ სტილი <div [ngStyle]="{'color': textColor, 'font-size': fontSize}">Styled Text</div>
+
+	Pipes - პაიპსი არის ერთგვარი მეთოდები რომელსაც ვიძახებთ Html ში ჩაწერილი text ების ფორმირება - ცვლილებისთვის, პაიფსი შეიძლება იყოს უკვე მზა შექმნილიც და ხელით გაკეთებული - ვამატებთ აქედან import { Pipe, PipeTransform } from '@angular/core';
+	
+		Example
+			// custom-transform.pipe.ts
+			import { Pipe, PipeTransform } from '@angular/core';
+
+			@Pipe({
+  				name: 'customTransform'
+			})
+			export class CustomTransformPipe implements PipeTransform {
+  				transform(value: string, param1: string, param2: string): string {
+    				// Some transformation logic based on parameters
+    				return `${value} ${param1} ${param2}`;
+  				}
+			}
+
+			<p>{{ 'Hello' | customTransform: 'World' : '!' }}</p>
+
+		
+
+	BrowserModule - 
+
+	FormsModule - 
+
+	AppRoutingModule - 
+	
+	HttpClientModule - Http Request ის გასაკეთებელი მოდული ვამატებთ აქედან - import {HttpClientModule} from '@angular/common/http'
+
+	HttpRequest 
+		subscribe - არის ფუნქცია რომელიც აბრუნებს ინფორმაციას რექუესთიდან
+			next - არის subscribe ფუნქციის callback ფუნქცია რომელიც აბრუნებს response ს
+			error - არის subscribe ფუნქციის callback ფუნქცია რომელიც აბრუნებს error მესიჯს
+			complete - არის subscribe ფუნქციის callback ფუნქცია რომელიც აბრუნებს შედეგის მესიჯს რომელსაც ხელით წერ
+		Example 
+			
+  			users: any;
+  			constructor(private http: HttpClient) {}
+  			ngOnInit(): void {
+    				this.http.get("url").subscribe({
+      				next: response => this.users = response,
+      				error: error => console.log(error),
+      				complete: () => console.log('request completed')
+
+   			 });
+	
+	OnInit Interface - ამ ინტერფეისის წყალობით ჩვენ შექგვიძლია კომპონენტის პარამეტრები და ფუნქციები გადავცეთ Html ფაილში 	
+	
+	ngOnInit - ეს არის  OnInit Interface ის ფუნქცია რითიც უაშალოდ ხდება გადაცემა
+
+	
+	
+	CORS - არის ნეტში გასაწერი მეთოდ რომლის მერეც ანგულარიდან გაგზავნილი დაუცველი რექუესთები წაიკითხება 
+
+	mkcert - უსაფრთხოების სერთიფიკატი
+
+
+
+	
+
+
+	

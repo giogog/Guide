@@ -23,3 +23,6 @@ Pull
 	git pull origin (branch name exp main/origin)
 Reset
 	git reset --hard HEAD - დააბრუნებს ბოლო დაკომიტებულამდე
+
+Other
+	mkdir - Create Folder 
